@@ -1,0 +1,59 @@
+<script src="{{ url_for('static', filename='public/assets/js/theme.bundle.js') }}"></script>
+
+<!--Swiper slider-->
+
+<script src="{{ url_for('static', filename='public/assets/vendor/node_modules/js/swiper-bundle.min.js') }}"></script>
+<script>
+    //swiper-3
+    var swiperProjects = new Swiper(".swiper-projects", {
+        autoHeight: true,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 16
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 16
+            },
+            1024: {
+                slidesPerView: 2,
+                spaceBetween: 16
+            }
+        },
+        pagination: {
+            el: ".swiperProjects-pagination",
+            clickable: true
+        },
+        navigation: {
+            nextEl: ".swiperProjects-button-next",
+            prevEl: ".swiperProjects-button-prev"
+        }
+    });
+
+    //swiper-Testimonials
+    var swiperTestmonials = new Swiper(".swiper-quotes", {
+        loop: true,
+        grabCursor: true,
+        speed: 600,
+        autoHeight: true,
+        navigation: {
+            nextEl: ".swiperTestimonials-button-next",
+            prevEl: ".swiperTestimonials-button-prev",
+        },
+    });
+    var swiper = new Swiper(".swiper-people", {
+        spaceBetween: 0,
+        effect: "fade",
+        loop: true,
+        grabCursor: true,
+        speed: 600,
+    });
+    // Link together the navigation of both swipers
+    var swiperQuotes = document.querySelector('.swiper-quotes').swiper
+    var swiperPeople = document.querySelector('.swiper-people').swiper
+
+    swiperQuotes.controller.control = swiperPeople
+    swiperPeople.controller.control = swiperQuotes
+</script>

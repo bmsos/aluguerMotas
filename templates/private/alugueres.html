@@ -1,0 +1,92 @@
+{% extends 'private/bases/base_admin.html' %}
+
+{% block include_sidebar_default %}
+        {% with page='alugueres' %}
+          {% include 'private/partials/sidebars/sidebar-default.html' %}
+        {% endwith %}
+{% endblock %}
+
+{% block content %}
+          <!--//Page content//-->
+          <div class="content pb-0 pt-3 px-3 px-lg-6 d-flex flex-column-fluid">
+            <div class="container-fluid px-0">
+
+              <!--Widget row Title-->
+              <div class="row">
+                <div class="col-12 mb-3 mb-lg-5">
+                  <div class="overflow-hidden card table-nowrap table-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">Listagem de alugueres</h5>
+                      <a href="/adicionar-mota" class="btn btn-light btn-sm">Adicionar Mota</a>
+                    </div>
+                    <div class="table-responsive">
+                    <table class="table mb-0">
+                      <thead class="small text-uppercase bg-body text-muted">
+                        <tr>
+                          <th>Cliente</th>
+                          <th>Email</th>
+                          <th>Mota</th>
+                          <th>Levantamento</th>
+                          <th>Entrega</th>
+                          <th class="text-end">Ação</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for aluguer in alugueres %}
+                        <tr class="align-middle">
+                          <!-- Cliente -->
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <img src="{{ url_for('static', filename=aluguer.cliente.profile_img) }}" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="">
+                              <div>
+                                <div class="h6 mb-0 lh-1">{{ aluguer.cliente.nome }} {{ aluguer.cliente.apelido }}</div>
+                              </div>
+                            </div>
+                          </td>
+                          <!-- Email -->
+                          <td>
+                            {{ aluguer.cliente.email }}
+                          </td>
+                          <!-- Mota -->
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <img src="{{ url_for('static', filename=aluguer.mota.imagem1) }}" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="">
+                              <div>
+                                <div class="h6 mb-0 lh-1">{{ aluguer.mota.marca }} {{ aluguer.mota.modelo }}</div>
+                              </div>
+                            </div>
+                          </td>
+                          <!-- Levantamento -->
+                          <td>
+                            {{ aluguer.levantamento }}
+                          </td>
+                          <!-- Entrega -->
+                          <td>
+                            {{ aluguer.entrega }}
+                          </td>
+                          <td class="text-end">
+                            <div class="dropdown">
+                              <a data-bs-toggle="dropdown" href="#" class="btn p-1">
+                                <span class="material-symbols-rounded align-middle">
+                                  more_vert
+                                </span>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a href="/apagar-aluguer/{{ aluguer.id }}" class="dropdown-item">Apagar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--//Page content End//-->
+{% endblock %}

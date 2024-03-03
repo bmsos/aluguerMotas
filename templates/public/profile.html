@@ -1,0 +1,221 @@
+{% extends 'public/bases/base_misc.html' %}
+
+{% block title %}{{ mota.marca }} {{ mota.modelo }}{% endblock %}
+
+{% block css %}        
+        <!--Swiper slider-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='public/assets/vendor/node_modules/css/swiper-bundle.min.css') }}">
+        
+        <link rel="stylesheet" href="{{ url_for('static', filename='public/assets/vendor/node_modules/css/choices.min.css') }}">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='public/assets/vendor/node_modules/css/simplebar.min.css') }}">
+
+        <!-- Main CSS -->
+        <link href="{{ url_for('static', filename='public/assets/css/theme-shop.min.css') }}" rel="stylesheet">
+
+        <!--:Simplebar css ()-->
+        <style type="text/css">
+          .simplebar-track.simplebar-vertical {
+            width: 7px;
+          }
+
+          .simplebar-scrollbar:before {
+            background: currentColor;
+          }
+
+          .aviso {
+            display:block !important; 
+            text-align:center; 
+            padding: 10px 0; 
+            background-color:rgba(238, 10, 10, 0.7);
+            color: white;
+          }
+        </style>
+{% endblock %}
+
+{% block content %}
+
+     <!--Main content-->
+     <main>
+       <!-- PRODUCT PANEL -->
+       <section class="position-relative bg-white">
+         <div class="container pt-13 pt-lg-15 pb-9 pb-lg-11 position-relative">
+           <div class="row justify-content-between">
+             <!-- Galeria -->
+             <div class="col-xl-6 col-lg-7 col-md-8 mx-auto mx-lg-0 mb-5 mb-lg-0">
+               <div class="row g-1 justify-content-center">
+                 <div class="col-2">
+ 
+                   <!--Thumbnails for main slider(just above)-->
+                   <div class="swiper-container swiper-thumbnails overflow-hidden">
+                     <!-- Additional required wrapper -->
+                     <div class="swiper-wrapper d-flex flex-column">
+                       <!-- Slides -->
+                       <div class="swiper-slide w-100">
+                         <img src="{{ url_for('static', filename='public/assets/img/shop/single1.jpg') }}" alt="" class="w-100 rounded-0 h-auto">
+                       </div>
+                       <!-- Slides -->
+                       <div class="swiper-slide w-100">
+                         <img src="{{ url_for('static', filename='public/assets/img/shop/single2.jpg') }}" alt="" class="w-100 rounded-0 h-auto">
+                       </div>
+                       <!-- Slides -->
+                       <div class="swiper-slide w-100">
+                         <img src="{{ url_for('static', filename='public/assets/img/shop/single3.jpg') }}" alt="" class="w-100 rounded-0 h-auto">
+                       </div>
+ 
+                     </div>
+                   </div>
+                 </div>
+                 <div class="col-10">
+                   <!--Thumbnails main slider-->
+                   <div class="swiper-container overflow-hidden position-relative swiper-thumbnails-main">
+                     <!-- Additional required wrapper -->
+                     <div class="swiper-wrapper">
+                       <!-- Slides -->
+                       <div class="swiper-slide">
+                         <img src="{{ url_for('static', filename='public/assets/img/shop/single1.jpg') }}" alt="" class="img-fluid">
+                       </div>
+                       <!-- Slides -->
+                       <div class="swiper-slide">
+                         <img src="{{ url_for('static', filename='public/assets/img/shop/single2.jpg') }}" alt="" class="img-fluid">
+                       </div>
+                       <!-- Slides -->
+                       <div class="swiper-slide">
+                         <img src="{{ url_for('static', filename='public/assets/img/shop/single3.jpg') }}" alt="" class="img-fluid">
+                       </div>
+                     </div>
+                     <!-- Swiper Navigation buttons (Remove it if you have to) -->
+                     <div class="swiper-button-prev swiperThumb-prev text-white bg-dark">
+                     </div>
+                     <div class="swiper-button-next  swiperThumb-next text-white bg-dark">
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+ 
+             <!-- Painel Lateral Opcoes -->
+             <div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">
+ 
+               <!-- Product Description -->
+               <div class="mb-3 pb-3 border-bottom">
+                 <div class="mb-3">
+                   <h2 class="mb-4 display-4">{{ mota.marca }} {{ mota.modelo }}</h2>
+                   <div class="d-flex justify-content-between align-items-center">
+                     {% if promocao is defined and promocao %}
+                     <div>
+                       <p class="fs-5 mb-0">{{ mota.preco * (1-(promocao.desconto/100)) }} <del class="text-muted">{{ mota.preco }}</del> / dia</p>
+                     </div>
+                     {% else %}
+                     <div>
+                       <p class="fs-5 mb-0">{{ mota.preco }}€ / dia</p>
+                     </div>
+                     {% endif %}
+                   </div>
+                 </div>
+                 <p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tincidunt
+                   laoreet dolore magna aliquam erat volutpat.</p>
+                 <ul class="list-group list-group-flush">
+                   <li class="list-group-item bg-transparent px-0 py-3">Marca: {{ mota.marca }}</li>
+                   <li class="list-group-item bg-transparent px-0 py-3">Modelo: {{ mota.modelo }}</li>
+                   <li class="list-group-item bg-transparent px-0 py-3">Ciclística: {{ mota.categoria.nome }}</li>
+                   <li class="list-group-item bg-transparent px-0 py-3">Cilindrada: {{ mota.cilindrada }}cc</li>
+                   <li class="list-group-item bg-transparent px-0 py-3">Ano: {{ mota.ano }}</li>
+                 </ul>
+               </div>
+               {% if mota.is_rented == 1 %}
+               <div class="aviso">Alugada até {{ data_entrega }} às {{ hora_entrega }}h</div>
+               {% else %}
+                  {% if session is defined and session %}
+               <!-- Formulário -->
+               <form action="/aluguer" method="post">
+                 <input type="hidden" name="mota_id" value="{{ mota.id }}">
+                 <div class="mb-3 pb-3 border-bottom">
+                   <div class="form-floating mb-3">
+                     <input type="text" class="form-control" id="data_inicio" name="levantamento"
+                         placeholder="qualquer_coisa" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" required>
+                     <label for="data_inicio">Levantamento</label>
+                   </div>
+ 
+                   <div class="form-floating mb-3">
+                     <input type="text" class="form-control" id="data_fim" name="entrega"
+                         placeholder="qualquer_coisa" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" required>
+                     <label for="data_fim">Entrega</label>
+                   </div>
+                 </div>
+                 {% if levantamento is defined and levantamento %}
+                 <p class="mb-4">{{ mota.marca }} {{ mota.modelo }} alugada de {{ levantamento }} a {{ entrega }}.</p>
+                 {% endif %}
+                 <div class="d-grid">
+                   <button type="submit" class="btn btn-primary hover-lift">
+                     <i class="bx bx-shopping-bag fs-5 me-2"></i>
+                     Alugar
+                   </button>
+                 </div>
+ 
+               </form>
+               <!-- /Formulário -->
+                  {% else %}
+                  <div class="aviso">Inicie sessão para alugar uma mota</div>
+                  {% endif %}
+               {% endif %}
+             </div>
+           </div>
+         </div>
+       </section>
+ 
+ 
+ 
+     </main>
+{% endblock %}
+
+     
+
+{% block scripts %}
+    <!-- scripts -->
+    {% include 'public/partials/scripts.html' %}
+    <script src="{{ url_for('static', filename='public/assets/vendor/node_modules/js/choices.min.js') }}"></script>
+
+    <script>
+      //Swiper thumbnail demo
+      var swiperThumbnails = new Swiper(".swiper-thumbnails", {
+        spaceBetween: 8,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: true,
+      });
+      var swiperThumbnailsMain = new Swiper(".swiper-thumbnails-main", {
+        spaceBetween: 0,
+        navigation: {
+          nextEl: ".swiperThumb-next",
+          prevEl: ".swiperThumb-prev"
+        },
+        thumbs: {
+          swiper: swiperThumbnails
+        }
+      });
+      var el = document.querySelectorAll("[data-choices]");
+      el.forEach(e => {
+        const t = {
+          ...e.dataset.choices ? JSON.parse(e.dataset.choices) : {},
+          ...{
+            classNames: {
+              containerInner: e.className,
+              input: "form-control",
+              inputCloned: "form-control-xs",
+              listDropdown: "dropdown-menu",
+              itemChoice: "dropdown-item",
+              activeState: "show",
+              selectedState: "active"
+            }
+          }
+        }
+        new Choices(e, t)
+      });
+
+    </script>
+    <script src="{{ url_for('static', filename='public/assets/vendor/node_modules/js/simplebar.min.js') }}"></script>
+
+{% endblock %}
+
+

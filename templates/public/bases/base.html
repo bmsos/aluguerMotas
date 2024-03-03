@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="{{ url_for('static', filename='public/assets/img/favicon.ico') }}" type="image/ico">
+        
+        <!--Box Icons-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='public/assets/fonts/boxicons/css/boxicons.min.css') }}">
+
+        <!--Iconsmind Icons-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='public/assets/fonts/iconsmind/iconsmind.css') }}">
+    
+        <!-- Aos Animations CSS -->
+        <link href="{{ url_for('static', filename='public/assets/vendor/node_modules/css/aos.css') }}" rel="stylesheet">
+                    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+        <!--Swiper slider-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='public/assets/vendor/node_modules/css/swiper-bundle.min.css') }}">
+        
+        
+        {% block css %}{% endblock %}
+
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+         <!--Preloader Spinner-->
+         <div class="spinner-loader bg-primary text-white">
+            <div class="spinner-grow" role="status">
+            </div>
+            <span class="small d-block ms-2">Loading...</span>
+        </div>
+
+        <!--Header Start-->
+        {% include 'public/partials/header.html' %}
+
+        <!--Main content-->
+        {% block content %}{% endblock %}
+
+        <!--begin:Footer-->
+        {% include 'public/partials/footer.html' %}
+
+        <!-- begin Back to Top button -->
+        <a href="#" class="toTop">
+            <i class="bx bxs-up-arrow"></i>
+        </a>
+
+        <!-- scripts -->
+        {% include 'public/partials/scripts.html' %}
+
+        {% block scripts %}{% endblock %}
+
+    </body>
+
+</html>

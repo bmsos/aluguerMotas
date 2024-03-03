@@ -1,0 +1,81 @@
+<!-- TEMPLATE ORIGINAL: portfolio-classic-3-col -->
+{% extends 'public/bases/base.html' %}
+
+{% block title %}Catálogo Motas{% endblock %}
+
+{% block css %}
+<!-- Main CSS -->
+<link href="{{ url_for('static', filename='public/assets/css/theme.min.css') }}" rel="stylesheet">
+<style>
+    .badge-ml{
+        margin-left: 7px;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <section id="page-header" class="position-relative bg-dark text-white overflow-hidden">
+        <div class="container pt-11 pb-9 pb-lg-11 pt-lg-14">
+            <div class="row pt-lg-7">
+                <div class="col-lg-7">
+                    <ol class="breadcrumb mb-3">
+                        <li class="breadcrumb-item"><a href="#">Catálogo</a></li>
+
+        
+                    </ol>
+                    <h1 class="mb-0 display-4">Selecione a sua mota preferida</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/.Page-header-->
+
+    <section class="position-relative bg-white">
+        <div class="container py-9 py-lg-11 position-relative z-index-1">
+            {% if motas is defined and motas %}
+            <!-- Nav -->
+            <ul class="mb-5 nav nav-filter align-items-center justify-content-end mb-0" role="tablist">
+                <!--<li class="nav-item small text-muted d-flex me-2 me-md-4">Filtrar por:</li>-->
+                <br>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" href="#" data-bs-toggle="pill" data-filter="*" data-bs-target="#projects" aria-selected="true" role="tab">
+                        Todas
+                    </a>
+                </li>
+                {% for categoria in categorias %}
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="#" data-bs-toggle="pill" data-filter=".{{ categoria.nome.lower() }}" data-bs-target="#{{ categoria.nome.lower() }}" aria-selected="true" role="tab">
+                        {{ categoria.nome }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div id="projects" data-isotope='{"layoutMode": "masonry"}' class="row">
+                
+                {% for mota in motas %}
+                <div class="col-md-6 col-lg-4 mb-4 {{ mota.categoria.nome.lower() }} grid-item">
+                    <a href="/profile/{{ mota.id }}" class="card-hover">
+                        <div class="overflow-hidden position-relative mb-4">
+                            <img src="{{ url_for('static', filename=mota.imagem1) }}" alt="" class="img-zoom img-fluid">
+                        </div>
+                        <h5 class="mb-1">{{ mota.marca }} {{ mota.modelo }}</h5>
+                        
+                        <span class="text-muted">{{ mota.preco }}€ /dia | {{ mota.cilindrada }}cc
+                            <span class="badge badge-ml" {{ mota.categoria.badge_style | safe }}>{{ mota.categoria.nome }}</span>
+                        </span>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+            {% else %}
+            <h1 class="mb-0 display-6">Neste momento não temos motas disponíveis. <br>Por favor tente mais tarde.</h1>
+            {% endif %}
+        </div>
+    </section>
+    <!--/section-->
+</main>
+{% endblock %}

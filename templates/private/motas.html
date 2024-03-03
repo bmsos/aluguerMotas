@@ -1,0 +1,241 @@
+{% extends 'private/bases/base_admin.html' %}
+
+{% block include_sidebar_default %}
+        {% with page='motas' %}
+          {% include 'private/partials/sidebars/sidebar-default.html' %}
+        {% endwith %}
+{% endblock %}
+
+{% block content %}
+          <!--//Page content//-->
+          <div class="content pb-0 pt-3 px-3 px-lg-6 d-flex flex-column-fluid">
+            <div class="container-fluid px-0">
+
+              <!--Widget row Title-->
+              <div class="row">
+                <div class="col-12 mb-3 mb-lg-5">
+                  <div class="overflow-hidden card table-nowrap table-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">Listagem de motas</h5>
+                      <a href="/adicionar-mota" class="btn btn-light btn-sm">Adicionar Mota</a>
+                    </div>
+                    <div class="table-responsive">
+                    {% if route=='editar_mota' %}
+                      {% for mota in motas %}
+                        {% if mota.id == mota_selecionada.id %}
+                      <form action="/editar-mota/{{ mota.id }}" method="post" class="row g-3 needs-validation" novalidate>
+                      <table class="table mb-0">
+                        <thead class="small text-uppercase bg-body text-muted">
+                          <tr>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Categoria</th>
+                            <th>Cilindrada</th>
+                            <th>
+                              <!-- Desenrasque para que o ano fique visivel na route de edição -->
+                              Ano{% if mota_selecionada is defined %}{% for i in range(12) %}&nbsp;{% endfor %}{% endif %}
+                            </th>
+                            <th>Preço</th>
+                            <th>Estado</th>
+                            <th class="text-end"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for mota in motas %}
+                        {% if mota_selecionada is defined and mota_selecionada and mota.id == mota_selecionada.id %}
+                        <tr class="align-middle">
+                            
+                              <!-- Marca -->
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <img src="{{ url_for('static', filename=mota.imagem1) }}" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="">
+                                  <div>
+                                    <input type="text" class="form-control" value="{{ mota.marca }}" name="marca" required>
+                                            <div class="valid-feedback">
+                                                Tudo bem!
+                                            </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <!-- Modelo -->
+                              <td>
+                                <input type="text" class="form-control" name="modelo" value="{{ mota.modelo }}" required>
+                                <div class="valid-feedback">
+                                    Tudo bem!
+                                </div>
+                              </td>
+                              <!-- Categoria -->
+                              <td>
+                                <select class="form-control" name="categoria" data-choices='{"searchEnabled":false, "allowHTML":true,"itemSelectText":""}' required>
+                                  {% for categoria in categorias %}
+                                  <option value="{{ categoria.id }}" {{ 'selected' if categoria.id==mota.categoria_id }}>{{ categoria.nome }}</option>
+                                  {% endfor %}
+                                </select>
+
+                              <div class="valid-feedback">
+                                  Tudo bem!
+                              </div>
+                              </td>
+                              <!-- Cilindrada -->
+                              <td>
+                                <input type="number" class="form-control" value="{{ mota.cilindrada }}" name="cilindrada" required>
+                                <div class="valid-feedback">
+                                    Tudo bem!
+                                </div>
+                              </td>
+                              <!-- Ano -->
+                              <td>
+                                <input type="number" min="1985" max="2099" step="1" class="form-control" value="{{ mota.ano }}" name="ano" required>
+                                <div class="valid-feedback">
+                                    Tudo bem!
+                                </div>
+                              </td>
+                              <!-- Preco -->
+                              <td>
+                                <input type="number" min="0.00" step="0.01" class="form-control" value="{{ mota.preco }}" name="custo" aria-describedby="inputGroupPrepend" required>
+                                <div class="invalid-feedback">
+                                    Por favor selecione o custo
+                                </div>
+                              </td>
+                              <!-- Estado -->
+                              <td>
+                                <span 
+                              class="badge fs-6 fw-normal {{ 'bg-tint-success text-success' if mota.is_rented == 0 else 'bg-tint-warning text-warning' }}">
+                                {{ 'Disponível' if mota.is_rented == 0 else 'Alugada' }}
+                              </span>
+                              </td>
+                              <!-- Submit -->
+                              <td class="text-end">
+                                  <button class="col-md-12 btn btn-primary" type="submit">Guardar</button>
+                              </td>
+                            
+                          </tr>
+                          {% else %}
+                          <tr class="align-middle">
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <img src="{{ url_for('static', filename=mota.imagem1) }}" class="avatar sm rounded-pill me-3 flex-shrink-0"
+                                  alt="Customer">
+                                <div>
+                                  <div class="h6 mb-0 lh-1">{{ mota.marca }}</div>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              {{ mota.modelo }}
+                            </td>
+                            <td>
+                              {{ mota.categoria.nome }}
+                            </td>
+                            <td> 
+                              {{ mota.cilindrada }}cc
+                            </td>
+                            <td>
+                              {{ mota.ano }}
+                            </td>
+                            <td>
+                              {{ mota.preco }}€
+                            </td>
+                            <td>
+                              <span 
+                              class="badge fs-6 fw-normal {{ 'bg-tint-success text-success' if mota.is_rented == 0 else 'bg-tint-warning text-warning' }}">
+                                {{ 'Disponível' if mota.is_rented == 0 else 'Alugada' }}
+                              </span>
+                            </td>
+                            <td class="text-end">
+                              <div class="dropdown">
+                                <a data-bs-toggle="dropdown" href="#" class="btn p-1">
+                                  <span class="material-symbols-rounded align-middle">
+                                    more_vert
+                                  </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <a href="/editar-mota/{{ mota.id }}" class="dropdown-item">Editar</a>
+                                  <a href="/apagar-mota/{{ mota.id }}" class="dropdown-item">Apagar</a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          {% endif %}
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                    </form>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+
+                    {% if route == 'admin_motas' %}
+                    <table class="table mb-0">
+                      <thead class="small text-uppercase bg-body text-muted">
+                        <tr>
+                          <th>Marca</th>
+                          <th>Modelo</th>
+                          <th>Categoria</th>
+                          <th>Cilindrada</th>
+                          <th>Ano</th>
+                          <th>Preço</th>
+                          <th>Estado</th>
+                          <th class="text-end">Ação</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for mota in motas %}
+                        <tr class="align-middle">
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <img src="{{ url_for('static', filename=mota.imagem1) }}" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="">
+                              <div>
+                                <div class="h6 mb-0 lh-1">{{ mota.marca }}</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            {{ mota.modelo }}
+                          </td>
+                          <td>
+                            {{ mota.categoria.nome }}
+                          </td>
+                          <td> 
+                            {{ mota.cilindrada }}cc
+                          </td>
+                          <td>
+                            {{ mota.ano }}
+                          </td>
+                          <td>
+                            {{ mota.preco }}€
+                          </td>
+                          <td>
+                            <span 
+                            class="badge fs-6 fw-normal {{ 'bg-tint-success text-success' if mota.is_rented == 0 else 'bg-tint-warning text-warning' }}">
+                              {{ 'Disponível' if mota.is_rented == 0 else 'Alugada' }}
+                            </span>
+                          </td>
+                          <td class="text-end">
+                            <div class="dropdown">
+                              <a data-bs-toggle="dropdown" href="#" class="btn p-1">
+                                <span class="material-symbols-rounded align-middle">
+                                  more_vert
+                                </span>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a href="/editar-mota/{{ mota.id }}" class="dropdown-item">Editar</a>
+                                <a href="/apagar-mota/{{ mota.id }}" class="dropdown-item">Apagar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endif %}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--//Page content End//-->
+{% endblock %}

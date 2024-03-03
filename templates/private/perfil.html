@@ -1,0 +1,217 @@
+{% extends 'private/bases/base_admin.html' %}
+
+{% block include_sidebar_default %}
+        {% with page='index' %}
+          {% include 'private/partials/sidebars/sidebar-default.html' %}
+        {% endwith %}
+{% endblock %}
+
+{% block content %}
+          <!--//Page Toolbar//-->
+          <div class="toolbar px-3 px-lg-6 pt-3 pb-3">
+            <div class="position-relative container-fluid px-0">
+              <div class="row align-items-center position-relative">
+                <div class="col-sm-7 mb-3 mb-sm-0">
+                  <h3 class="mb-2"><span>Olá</span> {{ cliente.nome }}! 👋</h3>
+                  <p class="mb-0">Faça aqui a gestão do site</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--//Page Toolbar End//-->
+
+          <!--//Page content//-->
+          <div class="content pt-3 px-3 px-lg-6 d-flex flex-column-fluid">
+            <div class="container-fluid px-0 h-100">
+
+                <div class="row h-100">
+                    <div class="offset-md-1 col-lg-10">
+                        <!--Card-->
+                        <div class="card mb-3 mb-lg-5">
+                            <div class="card-body">
+                                <form action="/admin" method="post" enctype="multipart/form-data">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-12">
+                                        <h5 class="mb-3">
+                                            Imagem de perfil
+                                        </h5>
+                                        <div class="row align-items-center">
+                                            <div class="col-md-auto col-12 mb-4 mb-md-0">
+
+                                                <!-- Avatar -->
+                                                <div class="position-relative">
+                                                    <div class="avatar size-140">
+                                                        <img class="img-fluid rounded-pill"
+                                                            src="{{ url_for('static', filename=cliente.profile_img) }}" alt="...">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6>Clique em "GUARDAR ALTERAÇÕES" após selecionar a imagem</h6>
+                                                <p class="text-muted">A imagem não vai aparecer ser atribuída ao seu perfil assim que selecionada, mas apenas após clicar em "Guardar Alterações"</p>
+                                                <div class="d-flex align-items-center">
+                                                    
+                                                    <!--Upload Button -->
+                                                    <div
+                                                        class="position-relative">
+                                                        <input type="file" accept=".jpg, .png, .webp" class="d-none w-0 h-0 position-absolute" name="profile_img" id="profile-upload">
+                                                        <label for="profile-upload"
+                                                            data-tippy-placement="bottom" data-tippy-content='Depois de carregar a imagem, clique em "Gravar Alterações"'
+                                                            class="btn btn-primary me-3">
+                                                            Mudar imagem
+                                                        </label>
+                                                    </div>
+
+                                                    <!--Delete button-->
+                                                    <a href="/apagar-imagem" type="button" class="btn size-35 btn-outline-danger d-flex align-items-center justify-content-center p-0"
+                                                    data-tippy-placement="bottom" data-tippy-content="Delete photo">
+                                                    <span class="material-symbols-rounded align-middle">
+                                                        delete
+                                                      </span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div> <!-- / .row -->
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <div class="row">
+                                    <!-- First name -->
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="form-label" for="user_fname">Nome</label>
+                                            <input type="text" value="{{ cliente.nome }}" name="nome" class="form-control" id="user_fname">
+                                        </div>
+                                    </div>
+                                    <!-- Last name -->
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="form-label" for="user_lname">Apelido
+
+                                            </label>
+                                            <input type="text" name="apelido" value="{{ cliente.apelido }}" class="form-control" id="user_lname">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label class="form-label" for="user_phone">Password</label>
+                                        <input class="form-control" name="password" type="password" id="password" value="{{ cliente.password }}">
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label class="form-label" for="user_email">Email</label>
+                                        <input class="form-control" name="email" id="user_email" type="email" value="{{ cliente.email }}">
+                                        <small class="text-muted">This email will be shown to publicly.</small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-2 mb-3">
+                                        <div class="p-3 border rounded">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="admin" id="switchVisible" {{ 'checked' if cliente.admin==1 }}>
+                                                        <label class="form-check-label"
+                                                            for="switchVisible">Administrador</label>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- / .row -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <input type="submit" id="profile_save" class="btn btn-primary" value="Guardar alterações"></input>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card mb-3 mb-lg-5">
+                            <div class="card-body">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-12 col-md-9">
+
+                                        <!-- Delete heading -->
+                                        <h4>
+                                            Apagar a minha conta 
+                                        </h4>
+
+                                        <!-- Delete text -->
+                                        <p class="small text-muted mb-md-0">
+                                            <strong>Note:</strong>
+                                            deleting your account is a permanent action and will no longer
+                                            recoverable.
+                                        </p>
+
+                                    </div>
+                                    <div class="col-auto">
+
+                                        <!--Delete Button -->
+                                        <a href="/apagar-user/{{ cliente.id }}" class="btn btn-danger">
+                                            Apagar
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--//Page content End//-->
+
+{% endblock %}
+
+{% block on_page_notification %}
+        <!--On Profile Save notification-->
+        <div id="profile_notification_saved" role="alert" data-bs-autohide="true" data-bs-delay="3000" aria-live="assertive" aria-atomic="true" class="position-fixed start-50 top-0 translate-middle-x mt-4 z-index-fixed p-3 mb-4 overflow-hidden rounded-3 border-0 bg-success text-white shadow-lg toast hide">
+            <div class="d-flex align-items-center">
+                <div class="size-60 me-4 text-success rounded-circle shadow bg-tint-success d-flex align-items-center justify-content-center">
+                    <span class="material-symbols-rounded align-middle">
+                        check
+                      </span>
+                </div>
+                <div class="flex-grow-1">
+                    <h5 class="text-reset mb-0">Information saved</h5>
+                    <p class="mb-0 opacity-75">Your account has been updated!</p>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+<!--Toast notification-->
+<script>
+  var toastTrigger = document.getElementById('profile_save')
+var toastLiveExample = document.getElementById('profile_notification_saved')
+if (toastTrigger) {
+toastTrigger.addEventListener('click', function () {
+var toast = new bootstrap.Toast(toastLiveExample)
+
+toast.show()
+})
+}
+</script>
+<!--Page script begin-->
+<script src="{{ url_for('static', filename='private/assets/vendor/inputmask.min.js') }}"></script>
+<script>
+Inputmask().mask(document.querySelectorAll("[data-inputmask]"));
+</script>
+
+<!--Birthday Calendar-->
+<script src="{{ url_for('static', filename='private/assets/vendor/moment.min.js') }}"></script>
+<script src="{{ url_for('static', filename='private/assets/vendor/daterangepicker.js') }}"></script>
+<script>
+$(function () {
+    $('input[name="birthday"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format('YYYY'), 10)
+    });
+});
+</script>
+{% endblock %}

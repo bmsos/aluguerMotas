@@ -1,0 +1,40 @@
+<!-- TEMPLATE ORIGINAL: page-misc-error-404.html -->
+{% extends 'public/bases/base_misc.html' %}
+
+{% block title %}Erro 404{% endblock %}
+
+{% block css %}
+<!-- Main CSS -->
+<link href="{{ url_for('static', filename='public/assets/css/theme.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main class="main-content d-grid" id="main-content">
+  <section class="position-relative overflow-hidden">
+      <div class="container pt-14 pt-lg-15 pb-9">
+          <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto text-center position-relative">
+                  
+                  <div class=" position-relative z-index-1">
+                       
+                   <div class="text-danger mb-5">
+                     <img src="{{ url_for('static', filename='public/assets/img/graphics/illustration/404.svg') }}" class="width-18x mx-auto" alt="">
+                   </div>
+                      <h1 class="display-1 mb-2">404</h1>
+                      <h2 class="mb-4">Ups! Página não encontrada</h2>
+                      <p class="w-lg-75 lead mx-auto mb-5">
+                      Parece que a página que procura não existe.
+                   </p>
+                   <a href="/" class="fw-semibold">
+                       <i class="bx bx-left-arrow-alt lh-1 fw-normal me-2"></i>Voltar à página principal</a>
+                   </div>
+              </div>
+          </div>
+      </div>
+  </section>
+</main>  
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='public/assets/js/theme.bundle.js') }}"></script>
+{% endblock %}

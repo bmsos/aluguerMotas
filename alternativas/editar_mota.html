@@ -1,0 +1,214 @@
+{% extends 'private/bases/base_admin.html' %}
+
+{% block css %}
+<!--Prism css snippets-->
+<link rel="stylesheet" href="{{ url_for('static', filename='public/assets/vendor/node_modules/css/prism-tomorrow.css') }}">
+<style type="text/css">img[onload^="SVGInject("]{visibility:hidden;}</style>
+{% endblock %}
+
+{% block include_sidebar_default %}
+        {% with page='motas' %}
+          {% include 'private/partials/sidebars/sidebar-default.html' %}
+        {% endwith %}
+{% endblock %}
+
+{% block content %}
+
+          <!--//Page content//-->
+          <section class="position-relative overflow-hidden">
+            <div class="container pt-7 pt-lg-15">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center position-relative"> 
+                        <div class=" position-relative z-index-1">
+                            <h1 class="display-6 mb-2">Editar mota</h1>
+                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <section class="position-relative">
+                      <div class="container py-9 py-lg-8">
+                          <div class="row justify-content-center">
+                              <div class="col-lg-8 mb-5 mb-lg-0">
+                                  <div class="d-flex align-items-center mb-5">
+                                      <h6 class="mb-0 me-3 me-md-4">Informações Necessárias</h6>
+                                      <div class="border-bottom flex-grow-1"></div>
+                                  </div>
+                                  <form action="/editar-mota/{{ mota_selecionada.id }}" method="post" class="row g-3 needs-validation" novalidate>
+                                      <div class="col-md-4">
+                                          <label for="validationCustom01" class="form-label">Marca</label>
+                                          <input type="text" class="form-control" id="validationCustom01" value="{{ mota_selecionada.marca }}" name="marca" required>
+                                          <div class="valid-feedback">
+                                              Tudo bem!
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <label for="validationCustom02" class="form-label">Modelo</label>
+                                          <input type="text" class="form-control" id="validationCustom02" name="modelo" value="{{ mota_selecionada.modelo }}" required>
+                                          <div class="valid-feedback">
+                                              Tudo bem!
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <label for="validationCustomCusto" class="form-label">Custo</label>
+                                          <div class="input-group has-validation">
+                                              <input type="number" min="0.00" step="0.01" value="{{ mota_selecionada.preco }}" class="form-control" id="validationCustomCusto" name="custo" aria-describedby="inputGroupPrepend" required>
+                                              <span class="input-group-text" id="inputGroupPrepend">€/dia</span>
+                                              <div class="invalid-feedback">
+                                                  Por favor selecione o custo
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <label for="validationCustom03" class="form-label">Cilindrada</label>
+                                          <input type="number" class="form-control" id="validationCustom03" value="{{ mota_selecionada.cilindrada }}" name="cilindrada" required>
+                                          <div class="valid-feedback">
+                                              Tudo bem!
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <label for="validationCustom04" class="form-label">Ano</label>
+                                          <input type="number" min="1985" max="2099" step="1" class="form-control" id="validationCustom04" value="{{ mota_selecionada.ano }}" name="ano" required>
+                                          <div class="valid-feedback">
+                                              Tudo bem!
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <!--Basic select demo-->
+                                          <label for="chBasic" class="form-label">Categoria</label>
+                                          <select name="categoria" id="chBasic" class="form-control" data-choices='{"searchEnabled":false, "allowHTML":true,"itemSelectText":""}'>
+                                              <option value="" disabled>Selecione a categoria</option>
+                                              {% for categoria in categorias %}
+                                              <option value="{{ categoria.id }}" {{ 'selected' if categoria.id == mota_selecionada.categoria_id }}>{{ categoria.nome }}</option>
+                                              {% endfor %}
+                                          </select>
+                                          <div class="valid-feedback">
+                                              Tudo bem!
+                                          </div>
+                                      </div>                                                                
+                                  
+                                      <button class="col-md-12 btn btn-primary" style="margin-top:40px" type="submit">Guardar</button>
+                   
+                                  </form>
+                                  <hr class="my-7">
+                              </div>
+                          </div>
+                      </div>
+                  </section>
+                </div>
+            </div>
+        </section>
+          <!--//Page content End//-->
+{% endblock %}
+
+{% block scripts %}
+<!--Select scripts-->
+<script src="{{ url_for('static', filename='public/assets/vendor/node_modules/js/choices.min.js') }}"></script>
+<script>
+    //Images Array
+    var selectImages = [{
+            value: 'John Doe',
+            label: '<img src="assets/img/avatar/6.jpg" class="rounded-pill width-3x h-auto me-2" alt=""> John Doe'
+        },
+        {
+            value: 'Julia Roberts',
+            label: '<img src="assets/img/avatar/1.jpg" class="rounded-pill width-3x h-auto me-2" alt=""> Julia Roberts'
+        },
+        {
+            value: 'Mark Otto',
+            label: '<img src="assets/img/avatar/7.jpg" class="rounded-pill width-3x h-auto me-2" alt=""> Mark Otto'
+        },
+        {
+            value: 'Micheal Smith',
+            label: '<img src="assets/img/avatar/8.jpg" class="rounded-pill width-3x h-auto me-2" alt=""> Micheal Smith'
+        },
+
+    ];
+
+    //Choices image
+    const element = document.querySelector('.choices-image');
+    const choices = new Choices(element, {
+        choices: selectImages,
+        values: null,
+        allowHTML: true,
+        itemSelectText: "",
+        classNames: {
+            containerInner: element.className,
+            input: 'form-control',
+            inputCloned: 'form-control-xs',
+            listDropdown: 'dropdown-menu',
+            itemChoice: 'dropdown-item',
+            activeState: 'show',
+            selectedState: 'active',
+        },
+    });
+
+    //Default choices
+    var cSelect = document.querySelectorAll("[data-choices]");
+    cSelect.forEach(el => {
+        const t = {
+            ...el.dataset.choices ? JSON.parse(el.dataset.choices) : {},
+            ...{
+                classNames: {
+                    containerInner: el.className,
+                    input: "form-control",
+                    inputCloned: "form-control-sm",
+                    listDropdown: "dropdown-menu",
+                    itemChoice: "dropdown-item",
+                    activeState: "show",
+                    selectedState: "active"
+                }
+            }
+        }
+        new Choices(el, t)
+    });
+
+</script>
+<!--Copy to clipboard + prismJs-->
+<script src="{{ url_for('static', filename='public/assets/vendor/node_modules/js/prism.js') }}"></script>
+<script src="{{ url_for('static', filename='public/assets/vendor/node_modules/js/clipboard.min.js') }}"></script>
+<script>
+    /* Clipboard JS - Copy code button */
+    var cl = document.querySelector('.copy-link');
+    if (typeof !!cl && (cl) != 'undefined' && cl != null) {
+        var cle = document.querySelectorAll('.copy-link');
+        cle.forEach(el => {
+            el.addEventListener("click", function () {
+                var theButton = this;
+                var copyId = this.getAttribute('id');
+                var clipboard = new ClipboardJS('#' + copyId);
+
+                clipboard.on('success', function (e) {
+                    e.clearSelection();
+                    theButton.innerHTML = 'Copied!';
+                    setTimeout(function () {
+                        theButton.innerHTML = 'Copy code';
+                    }, 5000);
+                });
+            });
+        });
+    }
+
+</script>
+<script src="{{ url_for('static', filename='public/assets/js/theme.bundle.js') }}"></script>
+
+<script>
+var cSelect = document.querySelectorAll("[data-choices]");
+ cSelect.forEach(el => {
+   const t = { ...el.dataset.choices ? JSON.parse(el.dataset.choices) : {},
+    ...{
+        classNames: {
+        containerInner: el.className,
+        input: "form-control",
+        inputCloned: "form-control-sm",
+        listDropdown: "dropdown-menu",
+        itemChoice: "dropdown-item",
+        activeState: "show",
+        selectedState: "active"
+        }
+}
+}
+new Choices(el, t)
+});
+</script>
+
+{% endblock %}

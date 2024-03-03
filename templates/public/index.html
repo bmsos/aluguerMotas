@@ -1,0 +1,407 @@
+{% extends 'public/bases/base.html' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block css %}
+<!-- Google Fonts specific -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=PT+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- Main CSS -->
+<link href="{{ url_for('static', filename='public/assets/css/theme-pink.min.css') }}" rel="stylesheet">
+
+<!--Mapbox-->
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet'/>
+{% endblock %}
+
+
+{% block content %}
+<main class="bg-dark text-white">
+<!--page-hero-master-slider-->
+    <section class="position-relative bg-primary text-white overflow-hidden jarallax" data-speed=".2">
+        <!--Parallax image-->
+        <img src="{{ url_for('static', filename='public/assets/img/backgrounds/bg7.jpg') }}" class="jarallax-img opacity-25" alt="">
+        <div class="position-absolute w-100 h-100 bg-gradient-dark start-0 top-0"></div>
+        <div class="container position-relative z-index-1">
+            <div class="row vh-100 align-items-center">
+                <div class="col-lg-11 col-xl-9 mx-auto text-center">
+                    <!--Hero heading-->
+                    <h1 class="mb-4 display-1">Hoje apetece-me <br>uma mota
+                        <span class="d-inline-block text-warning"
+                            data-typed='{"strings": ["Urbana", "Trail", "Cruiser", "Scrambler", "Desportiva", "Tourer"]}'></span>
+                    </h1>
+                    <p class="w-lg-75 w-md-80 opacity-75 mb-6 mx-auto">
+                        Descubra todos os modelos de motociclos que temos disponíveis para si. <br>Existem vários modelos ao seu dispor a preços nunca antes vistos.
+                    </p>
+                    <a href="/catalogo" class="btn btn-lg btn-outline-white">Ver catálogo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="position-relative" id="next">
+        <div class="container py-9 py-lg-11">
+            <div class="row mb-7 mb-lg-11 justify-content-between align-items-end">
+                <div class="col-lg-10 col-xl-9 mx-auto text-center">
+                    <span class="h6 mb-4 d-block" data-aos="fade-up">Porquê escolher-nos</span>
+                    <h2 class="display-4 mb-4" data-aos="fade-up">Temos as melhores soluções de aluguer e leasing para motas
+                    </h2>
+                    <!--Divider line-->
+                    <span class="width-7x pt-1 mx-auto bg-gradient-primary d-table" data-aos="fade-down"></span>
+                </div>
+            </div>
+            <div class="row pb-lg-7 justify-content-around">
+                <!--Feature column-->
+                <div class="col-12 col-md-6 col-xl-3 mb-7 mb-xl-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center">
+                        <div
+                            class="mb-5 position-relative width-7x height-7x bg-gradient-primary text-white rounded-circle flex-center overflow-hidden">
+                            <i class="icon-Repeat-2 fs-3 position-relative"></i>
+                        </div>
+                        <h5 class="mb-3">Sem limites</h5>
+                        <p class="mb-4">
+                            Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing
+                            industries for layouts and visual mockups.
+                        </p>
+                        <a href="#!" class="link-hover-underline text-muted fw-semibold">
+                            Learn More<i class="bx bx-right-arrow-alt align-middle ms-1 lh-1 fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!--Feature column-->
+                <div class="col-12 col-md-6 col-xl-3 mb-7 mb-xl-0" data-aos="fade-up" data-aos-delay="150">
+                    <div class="text-center">
+                        <div
+                            class="mb-5 position-relative width-7x height-7x bg-gradient-primary text-white rounded-circle flex-center overflow-hidden">
+                            <i class="icon-Light-Bulb fs-3 position-relative"></i>
+                        </div>
+                        <h5 class="mb-3">Motas de qualidade</h5>
+                        <p class="mb-4">
+                            Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing
+                            industries for layouts and visual mockups.
+                        </p>
+                        <a href="#!" class="link-hover-underline text-muted fw-semibold">
+                            Learn More<i class="bx bx-right-arrow-alt align-middle ms-1 lh-1 fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!--Feature column-->
+                <div class="col-12 col-md-6 col-xl-3 mb-7 mb-md-0" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center">
+                        <div
+                            class="mb-5 position-relative width-7x height-7x bg-gradient-primary text-white rounded-circle flex-center overflow-hidden">
+                            <i class="icon-Thumbs-UpSmiley fs-3 position-relative"></i>
+                        </div>
+                        <h5 class="mb-3">Caução reduzida</h5>
+                        <p class="mb-4">
+                            Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing
+                            industries for layouts and visual mockups.
+                        </p>
+                        <a href="#!" class="link-hover-underline text-muted fw-semibold">
+                            Learn More<i class="bx bx-right-arrow-alt align-middle ms-1 lh-1 fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--Feature column-->
+                <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="250">
+                    <div class="text-center">
+                        <div
+                            class="mb-5 position-relative width-7x height-7x bg-gradient-primary text-white rounded-circle flex-center overflow-hidden">
+                            <i class="icon-Duplicate-Window fs-3 position-relative"></i>
+                        </div>
+                        <h5 class="mb-3">Totalmente seguro</h5>
+                        <p class="mb-4">
+                            Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing
+                            industries for layouts and visual mockups.
+                        </p>
+                        <a href="#!" class="link-hover-underline text-muted fw-semibold">
+                            Learn More<i class="bx bx-right-arrow-alt align-middle ms-1 lh-1 fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="position-relative bg-primary text-white">
+        <div class="container position-relative py-9 py-lg-11 z-index-1">
+            <div class="row justify-content-around">
+                <div class="col-md-12 mb-5">
+                    <h2 class="display-3 fw-normal justify-content-center align-items-center text-center">
+                        Os nossos números
+                    </h2>
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-center text-center">
+                <div class="col-md-3 pt-7">
+                    <h2 class="display-4 fw-normal aos-init aos-animate" data-aos="" data-countup="{&quot;startVal&quot;:0,&quot;suffix&quot;:&quot;+&quot;,&quot;duration&quot;:&quot;5&quot;}" data-to="48" data-aos-id="countup:in">48+</h2>
+                    <p class="mb-0">Prémios recebidos</p>
+                </div>
+                <div class="col-md-3 pt-7">
+                    <h2 class="display-4 fw-normal aos-init aos-animate" data-aos="" data-countup="{&quot;startVal&quot;:0,&quot;suffix&quot;:&quot;+&quot;,&quot;duration&quot;:&quot;4&quot;}" data-to="1356" data-aos-id="countup:in">1356+</h2>
+                    <p class="mb-0">Alugueres efetuados</p>
+                </div>
+                <div class="col-md-3 pt-7">
+                    <h2 class="display-4 fw-normal aos-init aos-animate" data-aos="" data-countup="{&quot;startVal&quot;:0,&quot;duration&quot;:&quot;5&quot;}" data-to="79" data-aos-id="countup:in">79</h2>
+                    <p class="mb-0">Modelos disponíveis</p>
+                </div>
+                <div class="col-md-3 pt-7">
+                    <h2 class="display-4 fw-normal aos-init aos-animate" data-aos="" data-countup="{&quot;startVal&quot;:0,&quot;suffix&quot;:&quot;%&quot;,&quot;duration&quot;:&quot;5&quot;}" data-to="99" data-aos-id="countup:in">99%</h2>
+                    <p class="mb-0">Clientes Satisfeitos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="position-relative overflow-hidden text-white">
+        <!--Divider shape-->
+        <svg class="position-absolute start-0 bottom-0 h-25 h-lg-75 w-100 text-info"
+            preserveAspectRatio="none" width="600" height="300" viewBox="0 0 600 300" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 300V0C0 0 6.53948e-05 120 162.857 210C325.714 300 600 300 600 300H0Z"
+                fill="currentColor" />
+        </svg>
+
+
+        <div class="container position-relative pt-9 pt-lg-11">
+            <div class="row mb-7 mb-lg-9 align-items-end">
+                <div class="col-12 col-xl-6 col-lg-8 mb-4 mb-lg-0">
+                    <!--Section heading and subheading-->
+                    <h6 class="mb-3 text-muted">Eles amam-nos</h6>
+                    <h2 class="display-4 mb-0">
+                        Os comentários dos nossos clientes
+                    </h2>
+                    <!--Divider line-->
+                    <span class="width-7x pt-1 bg-gradient-primary d-table mt-4"></span>
+                </div>
+            </div>
+        </div>
+        <div class="container pb-9 pb-lg-11">
+
+            <div class="row pb-9">
+                
+                <div class="col-lg-6">
+                        <!--Swiper testimonials image-->
+                    <div class="swiper rounded-5 shadow-lg swiper-people overflow-hidden">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="{{ url_for('static', filename='public/assets/img/960x900/4.jpg') }}" class="img-fluid rounded-5 shadow-lg"
+                                    alt="">
+                            </div>
+                            <div class="swiper-slide rounded-5">
+                                <img src="{{ url_for('static', filename='public/assets/img/960x900/2.jpg') }}" class="img-fluid rounded-5 shadow-lg"
+                                    alt="">
+                            </div>
+                            <div class="swiper-slide rounded-5">
+                                <img src="{{ url_for('static', filename='public/assets/img/960x900/3.jpg') }}" class="img-fluid rounded-5 shadow-lg"
+                                    alt="">
+                            </div>
+                            <div class="swiper-slide rounded-5">
+                                <img src="{{ url_for('static', filename='public/assets/img/960x900/5.jpg') }}" class="img-fluid rounded-5 shadow-lg"
+                                    alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Swiper testimonials text-->
+                <div class="col-lg-6 mx-auto">
+                    <div class="swiper swiper-quotes overflow-hidden">
+                        <!--swiper-wrapper-->
+                        <div class="swiper-wrapper">
+                            <!--swiper-slide-->
+                            <div class="swiper-slide">
+                                <div class="position-relative overflow-hidden px-4 py-5 rounded-3">
+                                    <div class="position-relative mb-4 justify-content-between align-items-center d-flex z-index-1">
+                                        <div class="text-warning small">
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative z-index-1">
+                                        <h4 class="mb-4 display-6 fw-semibold">
+                                            " Overall i am so glad i spent the (small amount of) money
+                                            to purchase this theme, it has paid off far more than it
+                                            cost.
+                                        </h4>
+                                        <h6 class="mb-0">Jimmy R</h6>
+                                        <small class="text-muted">Sr Project Manager</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--swiper-slide-->
+                            <div class="swiper-slide">
+                                <div class="position-relative overflow-hidden px-4 py-5 rounded-3">
+                                    <div class="position-relative mb-4 justify-content-between align-items-center d-flex z-index-1">
+                                        <div class="text-warning small">
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative z-index-1">
+                                        <h4 class="mb-4 display-6 fw-semibold">
+                                            " I just had an issue and I contacted support by email. I got the
+                                            solution
+                                            in less than 24 hours. Excellent job. Thank you very much. "
+                                        </h4>
+                                        <h6 class="mb-0">Serenity H</h6>
+                                        <small class="text-muted">Creative designer</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--swiper-slide-->
+                            <div class="swiper-slide">
+                                <div class="position-relative overflow-hidden px-4 py-5 rounded-3">
+                                    <div class="position-relative mb-4 justify-content-between align-items-center d-flex z-index-1 ">
+                                        <div class="text-warning small">
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative z-index-1">
+                                        <h4 class="mb-4 display-6 fw-semibold">
+                                            " It is perfect! Light, elegant, well structured. Thank
+                                            you, developers!!!
+                                        </h4>
+                                        <h6 class="mb-0">Mariah Soner</h6>
+                                        <small class="text-muted">Head of marketing at Some Inc.</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--swiper-slide-->
+                            <div class="swiper-slide">
+                                <div class="position-relative overflow-hidden px-4 py-5 rounded-3">
+                                    <div class=" position-relative mb-4 justify-content-between align-items-center d-flex z-index-1">
+                                        <div class="text-warning small">
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                            <i class="bx bx-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative z-index-1">
+                                        <h4 class="mb-4 display-6 fw-semibold">
+                                            " It is really refreshing to work with this bootstrap
+                                            theme which is truly helpful in the one of my client’s
+                                            website.
+                                        </h4>
+                                        <h6 class="mb-0">Mariah Soner</h6>
+                                        <small class="text-muted">Head of marketing at Some Inc.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--swiper slider navigation-->
+                        <div class="d-flex align-items-center justify-content-end">
+                            <div class="swiperTestimonials-button-prev swiper-button-prev start-0 mt-0 position-relative bg-transparent border text-white border-white rounded-circle width-3x height-3x "></div>
+                <div class="swiperTestimonials-button-next swiper-button-next mt-0 end-0 ms-2 position-relative bg-transparent border text-white border-white rounded-circle width-3x height-3x "></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background:#c26bf8" class="position-relative overflow-hidden">
+        <div class="container px-lg-12 py-9 py-lg-11 position-relative z-index-1">
+            <div class="mb-5 px-lg-11 text-center" data-aos="fade-up" data-aos-delay="100">
+                <h5 class="mb-0">Os nossos parceiros</h5>
+
+                <!--Divider line-->
+                <span class="width-7x pt-1 bg-gradient-secondary d-table mt-4 mx-auto"></span>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="150">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/amazon.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="150">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/microsoft.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/google.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="250">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/booking.com.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/grab.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="350">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/slack.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="400">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/uber.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="450">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/didi.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="500">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/lyft.svg') }}" alt="partner" class="img-fluid">
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-5 width-14x px-4"
+                    data-aos="fade-up" data-aos-delay="550">
+                    <img src="{{ url_for('static', filename='public/assets/img/partners/white/salesforce.svg') }}" alt="partner" class="img-fluid">
+                </div>
+            </div>
+            <!--Col-->
+        </div>
+    </section>
+
+    <!--Map start-->
+    <div id="map" class="w-100" style="height: 350px"></div>
+    <!--/.Map End-->
+</main>
+{% endblock %}
+
+
+{% block scripts %}
+<!--maps js-->
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZGVzaWdubXlsaWZlIiwiYSI6ImNqeHlkMzljejAwaHAzbXFtaXphYWI3NmYifQ.IRPz2gseBSE-DQMzurY4ZA';
+    var officeLocation = [75.788350, 26.958520];
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: officeLocation,
+        zoom: 9
+    });
+    // create the popup
+    var popup = new mapboxgl.Popup({ offset: 18 }).setHTML(
+        '<h6 class="text-primary mb-0 fw-normal">Our office</h6><small class="text-muted">CreativeDM, SE-03, Vidhyadhar Nagar, Jaipur, 302012</small>'
+    );
+    // create DOM element for the marker
+    var el = document.createElement('div');
+    el.id = 'marker';
+    // disable map zoom when using scroll
+    map.scrollZoom.disable();
+    // create the marker
+    new mapboxgl.Marker(el)
+        .setLngLat(officeLocation)
+        .setPopup(popup) // sets a popup on this marker
+        .addTo(map);
+</script>
+{% endblock %}

@@ -1,0 +1,76 @@
+<!--///////////Page sidebar begin///////////////-->
+<aside class="page-sidebar">
+  <div class="h-100 flex-column d-flex justify-content-start">
+
+    <!--Aside-logo-->
+    <div class="aside-logo d-flex align-items-center flex-shrink-0 justify-content-start px-5 position-relative">
+      <a href="/" class="d-block">
+        <div class="d-flex align-items-center flex-no-wrap text-truncate">
+          <!--Sidebar-icon-->
+          <span class="sidebar-icon size-40 d-flex align-items-center justify-content-center fs-4 lh-1 text-white rounded-3 bg-gradient-primary fw-bolder"> A </span>
+          <span class="sidebar-text">
+            <!--Sidebar-text-->
+            <span class="sidebar-text text-truncate fs-3 fw-bold">
+              Assan
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    <!--Sidebar-Menu-->
+    <div class="aside-menu px-3 my-auto" data-simplebar>
+      <nav class="flex-grow-1 h-100" id="page-navbar">
+        <!--:Sidebar nav-->
+        <ul class="nav flex-column collapse-group collapse d-flex">
+          <li class="nav-item sidebar-title text-truncate opacity-50 small">
+            <i class="bi bi-three-dots"></i>
+            <span>Main</span>
+          </li>
+          <li class="nav-item">
+            <a href="/admin" class="nav-link d-flex align-items-center text-truncate {{ 'active' if page=='index' }}">
+              <span class="sidebar-icon">
+                <span class="material-symbols-rounded">
+                  person
+                  </span>
+              </span>
+              <!--Sidebar nav text-->
+              <span class="sidebar-text">Perfil</span>
+            </a>
+          </li>
+          {% if cliente.admin == 1 %}
+          <li class="nav-item">
+            <a href="/admin/motas"
+              class="nav-link d-flex align-items-center text-truncate {{ 'active' if page=='motas' }}">
+              <span class="sidebar-icon">
+                <span class="material-symbols-rounded">
+                  two_wheeler
+                  </span>
+              </span>
+              <span class="sidebar-text">Motas</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/alugueres"
+              class="nav-link d-flex align-items-center text-truncate {{ 'active' if page=='alugueres' }}">
+              <span class="sidebar-icon">
+                <span class="material-symbols-rounded">
+                  sticky_note_2
+                  </span>
+              </span>
+              <span class="sidebar-text">Alugueres</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</aside>
+<!--///////////Page Sidebar End///////////////-->
+
+<!--///Sidebar close button for 991px or below devices///-->
+<div
+class="sidebar-close d-lg-none">
+<a href="#"></a>
+</div>
+<!--///.Sidebar close end///-->

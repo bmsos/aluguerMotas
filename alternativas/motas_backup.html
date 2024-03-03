@@ -1,0 +1,94 @@
+{% extends 'private/bases/base_admin.html' %}
+
+{% block include_sidebar_default %}
+        {% with page='motas' %}
+          {% include 'private/partials/sidebars/sidebar-default.html' %}
+        {% endwith %}
+{% endblock %}
+
+{% block content %}
+          <!--//Page content//-->
+          <div class="content pb-0 pt-3 px-3 px-lg-6 d-flex flex-column-fluid">
+            <div class="container-fluid px-0">
+
+              <!--Widget row Title-->
+              <div class="row">
+                <div class="col-12 mb-3 mb-lg-5">
+                  <div class="overflow-hidden card table-nowrap table-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">Listagem de motas</h5>
+                      <a href="/adicionar-mota" class="btn btn-light btn-sm">Adicionar Mota</a>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table mb-0">
+                        <thead class="small text-uppercase bg-body text-muted">
+                          <tr>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Categoria</th>
+                            <th>Cilindrada</th>
+                            <th>Ano</th>
+                            <th>Preço</th>
+                            <th>Estado</th>
+                            <th class="text-end">Ação</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for mota in motas %}
+                          <tr class="align-middle">
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <img src="{{ url_for('static', filename=mota.imagem1) }}" class="avatar sm rounded-pill me-3 flex-shrink-0"
+                                  alt="Customer">
+                                <div>
+                                  <div class="h6 mb-0 lh-1">{{ mota.marca }}</div>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              {{ mota.modelo }}
+                            </td>
+                            <td>
+                              {{ mota.categoria.nome }}
+                            </td>
+                            <td> 
+                              {{ mota.cilindrada }}
+                            </td>
+                            <td>
+                              {{ mota.ano }}
+                            </td>
+                            <td>
+                              {{ mota.preco }}
+                            </td>
+                            <td>
+                              <span 
+                              class="badge fs-6 fw-normal {{ 'bg-tint-success text-success' if mota.is_rented == 0 else 'bg-tint-warning text-warning' }}">
+                                {{ 'Disponível' if mota.is_rented == 0 else 'Alugada' }}
+                              </span>
+                            </td>
+                            <td class="text-end">
+                              <div class="dropdown">
+                                <a data-bs-toggle="dropdown" href="#" class="btn p-1">
+                                  <span class="material-symbols-rounded align-middle">
+                                    more_vert
+                                  </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <a href="#!" class="dropdown-item">Editar</a>
+                                  <a href="#!" class="dropdown-item">Apagar</a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--//Page content End//-->
+{% endblock %}
